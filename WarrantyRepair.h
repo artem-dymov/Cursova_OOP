@@ -4,7 +4,7 @@
 
 class WarrantyRepair : public ServiceCenterTask {
 public:
-    WarrantyRepair(std::string task_description, std::string model_manufacturer, int warranty_period);
+    WarrantyRepair(std::string task_description, std::string model_manufacturer, int priority, int warranty_period);
     ~WarrantyRepair();
 
     void display() const override;

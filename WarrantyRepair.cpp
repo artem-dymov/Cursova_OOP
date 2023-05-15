@@ -1,8 +1,8 @@
 #include "WarrantyRepair.h"
 #include <iostream>
 
-WarrantyRepair::WarrantyRepair(std::string task_description, std::string model_manufacturer, int warranty_period)
-    : ServiceCenterTask(task_description, model_manufacturer), warranty_period(warranty_period) {}
+WarrantyRepair::WarrantyRepair(std::string task_description, std::string model_manufacturer, int priority, int warranty_period)
+    : ServiceCenterTask(task_description, model_manufacturer, priority), warranty_period(warranty_period) {}
 
 WarrantyRepair::~WarrantyRepair() {
     std::cout << "Destroying WarrantyRepair object" << std::endl;

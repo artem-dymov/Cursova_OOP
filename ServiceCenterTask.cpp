@@ -4,7 +4,10 @@
 ServiceCenterTask::ServiceCenterTask(std::string task_description, std::string model_manufacturer, int priority)
 	: task_description(task_description), model_manufacturer(model_manufacturer), priority(priority) {}
 
-ServiceCenterTask::~ServiceCenterTask() {}
+ServiceCenterTask::~ServiceCenterTask()
+{
+	// std::cout << "Destroying ServiceCenter object" << std::endl;
+}
 
 void ServiceCenterTask::display() const 
 {

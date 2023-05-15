@@ -1,8 +1,8 @@
 #include "ScheduledMaintenance.h"
 #include <iostream>
 
-ScheduledMaintenance::ScheduledMaintenance(std::string task_description, std::string model_manufacturer, std::string maintenance_type)
-    : ServiceCenterTask(task_description, model_manufacturer), maintenance_type(maintenance_type) {}
+ScheduledMaintenance::ScheduledMaintenance(std::string task_description, std::string model_manufacturer, int priority, std::string maintenance_type)
+    : ServiceCenterTask(task_description, model_manufacturer, priority), maintenance_type(maintenance_type) {}
 
 ScheduledMaintenance::~ScheduledMaintenance() {
     std::cout << "Destroying ScheduledMaintenance object" << std::endl;

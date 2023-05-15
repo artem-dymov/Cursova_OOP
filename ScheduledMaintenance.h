@@ -4,7 +4,7 @@
 
 class ScheduledMaintenance : public ServiceCenterTask {
 public:
-    ScheduledMaintenance(std::string task_description, std::string model_manufacturer, std::string maintenance_type);
+    ScheduledMaintenance(std::string task_description, std::string model_manufacturer, int priority, std::string maintenance_type);
     ~ScheduledMaintenance();
 
     void display() const override;
