@@ -1,22 +1,20 @@
+#include "PriorityQueue.h"
 #include "ServiceCenterTask.h"
 #include "ScheduledMaintenance.h"
 #include "WarrantyRepair.h"
-#include <iostream>
 
 int main() {
-    ServiceCenterTask* task1 = new ScheduledMaintenance("Oil Change", "Toyota", "Regular Maintenance");
-    ServiceCenterTask* task2 = new WarrantyRepair("Replace Battery", "Apple", 12);
+    PriorityQueue pq;
 
-    std::cout << "Scheduled Maintenance Task:" << std::endl;
-    task1->display();
+    ServiceCenterTask* task1 = new ServiceCenterTask("Task 1", "Manufacturer 1");
+    ScheduledMaintenance* task2 = new ScheduledMaintenance("Task 2", "Manufacturer 2", "Type 1");
+    WarrantyRepair* task3 = new WarrantyRepair("Task 3", "Manufacturer 3", 12);
 
-    std::cout << std::endl;
+    pq.push(task1);
+    pq.push(task2);
+    pq.push(task3);
 
-    std::cout << "Warranty Repair Task:" << std::endl;
-    task2->display();
-
-    delete task1;
-    delete task2;
+    pq.display();
 
     return 0;
 }
