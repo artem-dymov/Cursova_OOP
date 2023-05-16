@@ -15,3 +15,6 @@ public:
 private:
     int warranty_period;
 };
+
+std::istream& operator<<(std::istream& os, const WarrantyRepair& task);
+std::ostream& operator<<(std::ostream& os, const WarrantyRepair& task);

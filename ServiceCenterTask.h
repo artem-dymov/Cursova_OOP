@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <iostream>
+
 
 class ServiceCenterTask {
 public:
@@ -19,3 +21,7 @@ protected:
     int priority;
 };
 
+// Оголошення оператора << як незалежної функції
+std::ostream& operator<<(std::ostream& os, const ServiceCenterTask& task);
+// Оголошення оператора >> як незалежної функції
+std::istream& operator>>(std::istream& is, ServiceCenterTask& task);

@@ -15,3 +15,6 @@ public:
 private:
     std::string maintenance_type;
 };
+
+std::istream& operator>>(std::istream& is, ScheduledMaintenance& task);
+std::ostream& operator<<(std::ostream& is, ScheduledMaintenance& task);
