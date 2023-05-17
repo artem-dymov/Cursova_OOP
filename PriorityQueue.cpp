@@ -40,25 +40,6 @@ void PriorityQueue::pop() {
     size--;
 }
 
-/*
-void PriorityQueue::pop() {
-    try
-    {
-        if (size == 0) {
-            throw (1);
-        }
-
-        delete tasks[0];
-        size--;
-        tasks[0] = tasks[size];
-        heapify(0);
-    }
-    catch (int)
-    {
-        std::cout << "Container is empty." << std::endl;
-    }
-}
-*/
 
 bool PriorityQueue::empty() const {
     return size == 0;
@@ -208,12 +189,6 @@ void PriorityQueue::print_tasks() {
     }
 }
 
-void PriorityQueue::display() const {
-    for (int i = 0; i < size; i++) {
-        tasks[i]->display();
-        std::cout << std::endl;
-    }
-}
 
 int PriorityQueue::countWarrantyRepairsByManufacturer(const std::string& manufacturer) const {
     int count = 0;

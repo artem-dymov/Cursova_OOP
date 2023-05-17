@@ -7,16 +7,17 @@
 void menu(PriorityQueue& queue) {
     std::string file_name = "queue.txt";
     int choice = -1;
+    std::string user_manufacturer;
     while (choice != 0) {
         std::cout << "Menu:\n";
         std::cout << "1. Create ScheduledMaintenance object\n";
         std::cout << "2. Create WarrantyRepair object\n";
         std::cout << "3. View contents of container\n";
-        std::cout << "4. Sort objects\n";
-        std::cout << "5. Delete first object.\n";
-        std::cout << "6. Clear all container\n";
-        std::cout << "7. Load objects from file\n";
-        std::cout << "8. Save objects to file\n";
+        std::cout << "4. Delete first object.\n";
+        std::cout << "5. Clear all container\n";
+        std::cout << "6. Load objects from file\n";
+        std::cout << "7. Save objects to file\n";
+        std::cout << "8. Do request\n";
         std::cout << "0. Exit\n";
         std::cout << "Enter your choice: ";
         std::cin >> choice;
@@ -40,33 +41,35 @@ void menu(PriorityQueue& queue) {
         case 3: {
             system("cls");
             std::cout << "Contents of container:\n";
-            queue.display();
+            queue.print_tasks();
             break;
         }
         case 4: {
             system("cls");
-            // queue.sort();
-            std::cout << "Objects sorted.\n";
+            queue.pop();
             break;
         }
         case 5: {
             system("cls");
-            queue.pop();
+            queue.clear();
             break;
         }
         case 6: {
             system("cls");
-            queue.clear();
+            queue.deserialize(file_name);
             break;
         }
         case 7: {
             system("cls");
-            queue.deserialize(file_name);
+            queue.serialize(file_name);
             break;
         }
         case 8: {
             system("cls");
-            queue.serialize(file_name);
+            std::cout << "Enter manufacturer: \n" << std::endl;
+            std::cin >> user_manufacturer;
+            std::cout << "Request result: " << queue.countWarrantyRepairsByManufacturer(user_manufacturer)
+                << "\n" << std::endl;
             break;
         }
         case 0: {
