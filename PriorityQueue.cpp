@@ -18,12 +18,7 @@ void PriorityQueue::push(ServiceCenterTask* task) {
         resize();
     }
     tasks[size] = task;
-    int i = size;
     size++;
-    while (i > 0 && tasks[parent(i)]->get_priority() > tasks[i]->get_priority()) {
-        std::swap(tasks[parent(i)], tasks[i]);
-        i = parent(i);
-    }
 }
 
 ServiceCenterTask* PriorityQueue::top() const {
@@ -45,26 +40,6 @@ void PriorityQueue::pop() {
 
 bool PriorityQueue::empty() const {
     return size == 0;
-}
-
-void PriorityQueue::display() const {
-    for (int i = 0; i < size; i++) {
-        tasks[i]->display();
-        std::cout << std::endl;
-    }
-}
-
-int PriorityQueue::countWarrantyRepairsByManufacturer(const std::string& manufacturer) const {
-    int count = 0;
-
-    for (int i = 0; i < size; i++) {
-        WarrantyRepair* wr = dynamic_cast<WarrantyRepair*>(tasks[i]);
-        if (wr != nullptr && wr->get_model_manufacturer() == manufacturer) {
-            count++;
-        }
-    }
-
-    return count;
 }
 
 int PriorityQueue::parent(int i) const {
@@ -103,6 +78,11 @@ void PriorityQueue::resize() {
     }
     delete[] tasks;
     tasks = newTasks;
+}
+
+void PriorityQueue::sort() {
+    for (int i = size / 2 - 1; i >= 0; --i)
+        heapify(i);
 }
 
 // Метод серіалізації об'єктів та збереження даних об'єктів у файл
@@ -207,4 +187,24 @@ void PriorityQueue::print_tasks() {
         std::cout << "\n" << typeid(*tasks[i]).name() << std::endl;
         std::cout << *tasks[i] << std::endl;
     }
+}
+
+void PriorityQueue::display() const {
+    for (int i = 0; i < size; i++) {
+        tasks[i]->display();
+        std::cout << std::endl;
+    }
+}
+
+int PriorityQueue::countWarrantyRepairsByManufacturer(const std::string& manufacturer) const {
+    int count = 0;
+
+    for (int i = 0; i < size; i++) {
+        WarrantyRepair* wr = dynamic_cast<WarrantyRepair*>(tasks[i]);
+        if (wr != nullptr && wr->get_model_manufacturer() == manufacturer) {
+            count++;
+        }
+    }
+
+    return count;
 }

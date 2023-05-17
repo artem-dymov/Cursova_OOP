@@ -11,6 +11,7 @@ void menu(PriorityQueue& queue) {
         std::cout << "1. Create ScheduledMaintenance object\n";
         std::cout << "2. Create WarrantyRepair object\n";
         std::cout << "3. View contents of container\n";
+        std::cout << "4. Sort objects\n";
         std::cout << "0. Exit\n";
         std::cout << "Enter your choice: ";
         std::cin >> choice;
@@ -37,8 +38,15 @@ void menu(PriorityQueue& queue) {
             queue.print_tasks();
             break;
         }
-        case 0:
+        case 4: {
+            system("cls");
+            queue.sort();
+            std::cout << "Objects sorted.\n";
             break;
+        }
+        case 0: {
+            break;
+        }
         default:
             std::cout << "Invalid choice. Please try again.\n";
             break;
