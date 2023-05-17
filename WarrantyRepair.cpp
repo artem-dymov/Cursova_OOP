@@ -23,7 +23,7 @@ void WarrantyRepair::set_warranty_period(int warranty_period)
     this->warranty_period = warranty_period; 
 }
 
-std::ostream& operator<<(std::ostream& os, const WarrantyRepair& task)
+std::ostream& operator<<(std::ostream& os, WarrantyRepair& task)
 {
 	os << "Task description: " << task.get_task_description() << std::endl;
 	os << "Model manufacturer: " << task.get_model_manufacturer() << std::endl;
@@ -37,6 +37,8 @@ std::istream& operator>>(std::istream& is, WarrantyRepair& task)
 {
 	std::string task_description, model_manufacturer;
 	int priority, warranty_period;
+
+	is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	std::cout << "Input task description: ";
 	getline(is, task_description);
 
@@ -45,7 +47,7 @@ std::istream& operator>>(std::istream& is, WarrantyRepair& task)
 
 	std::cout << "Input priority: ";
 	is >> priority;
-
+	is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	std::cout << "Input warranty_period: ";
 	is >> (is, warranty_period);
 

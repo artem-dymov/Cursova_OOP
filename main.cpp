@@ -4,18 +4,53 @@
 #include "WarrantyRepair.h"
 
 
+void menu(PriorityQueue& queue) {
+    int choice = -1;
+    while (choice != 0) {
+        std::cout << "Menu:\n";
+        std::cout << "1. Create ScheduledMaintenance object\n";
+        std::cout << "2. Create WarrantyRepair object\n";
+        std::cout << "3. View contents of container\n";
+        std::cout << "0. Exit\n";
+        std::cout << "Enter your choice: ";
+        std::cin >> choice;
+        switch (choice) {
+        case 1: {
+            system("cls");
+            ScheduledMaintenance* new_scheduled_maintenance = new ScheduledMaintenance("", "", 0, "");
+            std::cout << "Enter ScheduledMaintenance object data:\n";
+            std::cin >> *new_scheduled_maintenance;
+            queue.push(new_scheduled_maintenance);
+            break;
+        }
+        case 2: {
+            system("cls");
+            WarrantyRepair* new_warranty_repair = new WarrantyRepair("", "", 0, 0);
+            std::cout << "Enter WarrantyRepair object data:\n";
+            std::cin >> *new_warranty_repair;
+            queue.push(new_warranty_repair);
+            break;
+        }
+        case 3: {
+            system("cls");
+            std::cout << "Contents of container:\n";
+            queue.print_tasks();
+            break;
+        }
+        case 0:
+            break;
+        default:
+            std::cout << "Invalid choice. Please try again.\n";
+            break;
+        }
+        system("pause");
+    }
+}
+
+
 int main() {
-    PriorityQueue pq;
-
-    ServiceCenterTask* task1 = new ServiceCenterTask("Task 1", "Manufacturer 1", 1);
-    ScheduledMaintenance* task2 = new ScheduledMaintenance("Task 2", "Manufacturer 2", 2, "Type 1");
-    WarrantyRepair* task3 = new WarrantyRepair("Task 3", "Manufacturer 3", 1, 12);
-
-    pq.push(task1);
-    pq.push(task2);
-    pq.push(task3);
-
-    pq.display();
-
+    PriorityQueue* queue = new PriorityQueue();
+    menu(*queue);
+    delete queue;
     return 0;
 }

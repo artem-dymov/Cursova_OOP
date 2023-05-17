@@ -34,24 +34,27 @@ std::ostream& operator<<(std::ostream& os, const ScheduledMaintenance& task)
 
 std::istream& operator>>(std::istream& is, ScheduledMaintenance& task)
 {
-	std::string task_description, model_manufacturer, maintenance_type;
-	int priority;
-	std::cout << "Input task description: ";
-	getline(is, task_description);
+    std::string task_description, model_manufacturer, maintenance_type;
+    int priority;
 
-	std::cout << "Input model manufacturer: ";
-	getline(is, model_manufacturer);
+    is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cout << "Input task description: ";
+    getline(is, task_description);
 
-	std::cout << "Input priority: ";
-	is >> priority;
+    std::cout << "Input model manufacturer: ";
+    getline(is, model_manufacturer);
 
-	std::cout << "Input maintenance type: ";
-	getline(is, maintenance_type);
+    std::cout << "Input priority: ";
+    is >> priority;
+    is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-	task.set_task_description(task_description);
-	task.set_model_manufacturer(model_manufacturer);
-	task.set_priority(priority);
-	task.set_maintenance_type(maintenance_type);
+    std::cout << "Input maintenance type: ";
+    getline(is, maintenance_type);
 
-	return is;
+    task.set_task_description(task_description);
+    task.set_model_manufacturer(model_manufacturer);
+    task.set_priority(priority);
+    task.set_maintenance_type(maintenance_type);
+
+    return is;
 }
