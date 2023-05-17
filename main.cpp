@@ -12,6 +12,8 @@ void menu(PriorityQueue& queue) {
         std::cout << "2. Create WarrantyRepair object\n";
         std::cout << "3. View contents of container\n";
         std::cout << "4. Sort objects\n";
+        std::cout << "5. Delete first element\n";
+        std::cout << "6. Clear container\n";
         std::cout << "0. Exit\n";
         std::cout << "Enter your choice: ";
         std::cin >> choice;
@@ -42,6 +44,16 @@ void menu(PriorityQueue& queue) {
             system("cls");
             queue.sort();
             std::cout << "Objects sorted.\n";
+            break;
+        }
+        case 5: {
+            system("cls");
+            queue.pop();
+            break;
+        }
+        case 6: {
+            system("cls");
+            queue.clear();
             break;
         }
         case 0: {

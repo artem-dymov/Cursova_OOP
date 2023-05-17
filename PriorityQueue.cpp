@@ -29,13 +29,22 @@ ServiceCenterTask* PriorityQueue::top() const {
 }
 
 void PriorityQueue::pop() {
-    if (size == 0) {
-        throw std::runtime_error("PriorityQueue is empty");
+    try
+    {
+        if (size == 0) {
+            throw (size);
+        }
+
+        delete tasks[0];
+        size--;
+        tasks[0] = tasks[size];
     }
-    delete tasks[0];
-    size--;
-    tasks[0] = tasks[size];
+    catch (int size)
+    {
+        std::cout << "Container is empty." << std::endl;
+    }
 }
+
 
 bool PriorityQueue::empty() const {
     return size == 0;
