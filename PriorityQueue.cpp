@@ -35,39 +35,10 @@ void PriorityQueue::pop() {
     delete tasks[0];
     size--;
     tasks[0] = tasks[size];
-    heapify(0);
 }
 
 bool PriorityQueue::empty() const {
     return size == 0;
-}
-
-int PriorityQueue::parent(int i) const {
-    return (i - 1) / 2;
-}
-
-int PriorityQueue::left(int i) const {
-    return 2 * i + 1;
-}
-
-int PriorityQueue::right(int i) const {
-    return 2 * i + 2;
-}
-
-void PriorityQueue::heapify(int i) {
-    int l = left(i);
-    int r = right(i);
-    int smallest = i;
-    if (l < size && tasks[l]->get_priority() < tasks[smallest]->get_priority()) {
-        smallest = l;
-    }
-    if (r < size && tasks[r]->get_priority() < tasks[smallest]->get_priority()) {
-        smallest = r;
-    }
-    if (smallest != i) {
-        std::swap(tasks[i], tasks[smallest]);
-        heapify(smallest);
-    }
 }
 
 void PriorityQueue::resize() {
@@ -81,10 +52,16 @@ void PriorityQueue::resize() {
 }
 
 void PriorityQueue::sort() {
-    for (int i = size / 2 - 1; i >= 0; --i)
-        heapify(i);
+    for (int i = 1; i < size; ++i) {
+        ServiceCenterTask* key = tasks[i];
+        int j = i - 1;
+        while (j >= 0 && tasks[j]->get_priority() > key->get_priority()) {
+            tasks[j + 1] = tasks[j];
+            --j;
+        }
+        tasks[j + 1] = key;
+    }
 }
-
 // Метод серіалізації об'єктів та збереження даних об'єктів у файл
 void PriorityQueue::serialize(const std::string& filename) const {
     std::ofstream file(filename);
