@@ -37,7 +37,9 @@ void PriorityQueue::pop() {
 
         delete tasks[0];
         size--;
-        tasks[0] = tasks[size];
+        for (int i = 0; i < size; ++i) {
+            tasks[i] = tasks[i + 1];
+        }
     }
     catch (int size)
     {

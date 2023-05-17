@@ -12,8 +12,8 @@ void menu(PriorityQueue& queue) {
         std::cout << "2. Create WarrantyRepair object\n";
         std::cout << "3. View contents of container\n";
         std::cout << "4. Sort objects\n";
-        std::cout << "5. Delete first element\n";
-        std::cout << "6. Clear container\n";
+        std::cout << "5. Delete first object.\n";
+        std::cout << "6. Clear all container\n";
         std::cout << "0. Exit\n";
         std::cout << "Enter your choice: ";
         std::cin >> choice;
