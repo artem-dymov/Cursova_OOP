@@ -5,6 +5,7 @@
 
 
 void menu(PriorityQueue& queue) {
+    std::string file_name = "queue.txt";
     int choice = -1;
     while (choice != 0) {
         std::cout << "Menu:\n";
@@ -14,6 +15,8 @@ void menu(PriorityQueue& queue) {
         std::cout << "4. Sort objects\n";
         std::cout << "5. Delete first object.\n";
         std::cout << "6. Clear all container\n";
+        std::cout << "7. Load objects from file\n";
+        std::cout << "8. Save objects to file\n";
         std::cout << "0. Exit\n";
         std::cout << "Enter your choice: ";
         std::cin >> choice;
@@ -37,12 +40,12 @@ void menu(PriorityQueue& queue) {
         case 3: {
             system("cls");
             std::cout << "Contents of container:\n";
-            queue.print_tasks();
+            queue.display();
             break;
         }
         case 4: {
             system("cls");
-            queue.sort();
+            // queue.sort();
             std::cout << "Objects sorted.\n";
             break;
         }
@@ -54,6 +57,16 @@ void menu(PriorityQueue& queue) {
         case 6: {
             system("cls");
             queue.clear();
+            break;
+        }
+        case 7: {
+            system("cls");
+            queue.deserialize(file_name);
+            break;
+        }
+        case 8: {
+            system("cls");
+            queue.serialize(file_name);
             break;
         }
         case 0: {
@@ -74,3 +87,4 @@ int main() {
     delete queue;
     return 0;
 }
+

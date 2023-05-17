@@ -19,34 +19,46 @@ void PriorityQueue::push(ServiceCenterTask* task) {
     }
     tasks[size] = task;
     size++;
+    for (int i = size - 1; i > 0; i--) {
+        if (tasks[i]->get_priority() < tasks[i - 1]->get_priority()) {
+            std::swap(tasks[i], tasks[i - 1]);
+        }
+    }
+
 }
 
 ServiceCenterTask* PriorityQueue::top() const {
-    if (size == 0) {
-        throw std::runtime_error("PriorityQueue is empty");
-    }
     return tasks[0];
 }
 
+
+void PriorityQueue::pop() {
+    delete tasks[0];
+    for (int i = 0; i < size - 1; i++) {
+        tasks[i] = tasks[i + 1];
+    }
+    size--;
+}
+
+/*
 void PriorityQueue::pop() {
     try
     {
         if (size == 0) {
-            throw (size);
+            throw (1);
         }
 
         delete tasks[0];
         size--;
-        for (int i = 0; i < size; ++i) {
-            tasks[i] = tasks[i + 1];
-        }
+        tasks[0] = tasks[size];
+        heapify(0);
     }
-    catch (int size)
+    catch (int)
     {
         std::cout << "Container is empty." << std::endl;
     }
 }
-
+*/
 
 bool PriorityQueue::empty() const {
     return size == 0;
@@ -62,17 +74,36 @@ void PriorityQueue::resize() {
     tasks = newTasks;
 }
 
-void PriorityQueue::sort() {
-    for (int i = 1; i < size; ++i) {
-        ServiceCenterTask* key = tasks[i];
-        int j = i - 1;
-        while (j >= 0 && tasks[j]->get_priority() > key->get_priority()) {
-            tasks[j + 1] = tasks[j];
-            --j;
-        }
-        tasks[j + 1] = key;
+
+int PriorityQueue::parent(int i) const {
+    return (i - 1) / 2;
+}
+
+int PriorityQueue::left(int i) const {
+    return 2 * i + 1;
+}
+
+int PriorityQueue::right(int i) const {
+    return 2 * i + 2;
+}
+
+void PriorityQueue::heapify(int i) {
+    int l = left(i);
+    int r = right(i);
+    int smallest = i;
+    if (l < size && tasks[l]->get_priority() < tasks[smallest]->get_priority()) {
+        smallest = l;
+    }
+    if (r < size && tasks[r]->get_priority() < tasks[smallest]->get_priority()) {
+        smallest = r;
+    }
+    if (smallest != i) {
+        std::swap(tasks[i], tasks[smallest]);
+        heapify(smallest);
     }
 }
+
+
 // Метод серіалізації об'єктів та збереження даних об'єктів у файл
 void PriorityQueue::serialize(const std::string& filename) const {
     std::ofstream file(filename);

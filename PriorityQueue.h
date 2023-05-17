@@ -26,7 +26,6 @@ public:
 
     int get_size();
     void print_tasks();
-    void sort();
 
 private:
     ServiceCenterTask** tasks;
